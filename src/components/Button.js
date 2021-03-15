@@ -1,7 +1,6 @@
 import React from "react";
 
 import "components/Button.scss";
-import { action } from "@storybook/addon-actions/dist/preview";
 
 export default function Button(props) {
    let buttonClass = "button";
@@ -17,7 +16,7 @@ export default function Button(props) {
    return (
       <button 
          disabled={props.disabled}
-         onClick={action("button-clicked")}
+         onClick={props.onClick}
          className={buttonClass}
       >
          {props.children}
