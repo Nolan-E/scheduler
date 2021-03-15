@@ -24,6 +24,5 @@ export default function Application(props) {
         {/* Replace this with the schedule elements durint the "The Scheduler" activity. */}
       </section>
     </main>
-
   );
 }
