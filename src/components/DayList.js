@@ -3,7 +3,7 @@ import React from "react";
 import DayListIem from "./DayListItem";
 
 export default function DayList(props) {
-  const days = props.days.map(day => {
+  const daysArr = props.days.map(day => {
     return (
       <DayListIem
         key={day.id}
@@ -14,5 +14,5 @@ export default function DayList(props) {
       />
     );
   });
-  return <ul>{days}</ul>;
+  return <ul>{daysArr}</ul>;
 };
