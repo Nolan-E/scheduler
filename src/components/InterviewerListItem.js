@@ -2,6 +2,7 @@ import React from 'react';
 
 import 'components/InterviewerListItem.scss';
 import className from 'classnames';
+
 export default function InterviewerListItem(props) {
   let itemClass = className('interviewers__item', {
     'interviewers__item--selected': props.selected
