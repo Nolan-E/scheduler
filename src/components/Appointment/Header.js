@@ -1,8 +1,5 @@
 import React from "react";
 
-// import "components/Button.scss";
-import classNames from 'classnames';
-
 export default function Header(props) {
   return (
     <header className="appointment__time">
