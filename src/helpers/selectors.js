@@ -4,5 +4,5 @@ export function getAppointmentsForDay(state, day) {
 };
 
 export function getInterview(state, interview) {
-  return !interview ? null : {interviewer: state.interviewers[interview.interviewer], student: interview.student};
+  return !interview ? null : {...interview, interviewer: state.interviewers[interview.interviewer]};
 };
