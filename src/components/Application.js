@@ -46,7 +46,6 @@ export default function Application(props) {
       .then(() => setState({...state, appointments}))
   };
   
-  
   useEffect(() => {
     Promise.all([
       axios.get('/api/days'),

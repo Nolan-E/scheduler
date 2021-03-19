@@ -36,7 +36,7 @@ export default function Appointment(props) {
   const deleteInterview = () => {
     transition(CONFIRM)
   }
-  
+
   const confirmDelete = () => {
     transition(DELETING)
     props.cancelInterview(props.id)
@@ -46,9 +46,6 @@ export default function Appointment(props) {
   const editInterview = () => {
     transition(EDIT)
   }
-  
-  
-  
 
   return (
     <article className="appointment">
