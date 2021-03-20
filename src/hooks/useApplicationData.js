@@ -9,6 +9,30 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
+  const getSpotsCount = (dayObj, appointments) => {
+    console.log('label', dayObj)
+    let count = 0;
+    for(const id of dayObj.appointments) {
+      const appointment = appointments[id];
+      if (!appointment.interview) {
+        count++;
+      }
+    }
+    return count;
+  }
+  
+  const updateSpots = (dayName, days, appointments) => {
+    const day = days.find((item) => item.name === dayName);
+    const unbooked = getSpotsCount(day, appointments);
+    const newArr = days.map(item => {
+      if (item.name === dayName) {
+        return {...item, spots: unbooked};
+      }
+      return item;
+    });
+    return newArr;
+  }
+
   const setDay = day => setState({...state, day});
 
   const bookInterview = (id, interview) => {
@@ -20,8 +44,12 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const spots = updateSpots(state.day, state.days, appointments);
     return axios.put(`/api/appointments/${id}`, appointment)
-      .then(() => setState({...state, appointments}))
+      .then(() => {
+        setState({...state, appointments, days: spots})
+        console.log(state)
+      })
   };
 
   const cancelInterview = (id) => {
@@ -33,8 +61,9 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
+    const spots = updateSpots(state.day, state.days, appointments);
     return axios.delete(`/api/appointments/${id}`, appointment)
-      .then(() => setState({...state, appointments}))
+      .then(() => setState({...state, appointments, days: spots}))
   };
 
   useEffect(() => {
@@ -52,5 +81,12 @@ export default function useApplicationData() {
         }));
       });
   }, [])
+
+
+  console.log('###Initial state.days:\n', state.days);
+  // const days = updateSpots(state.day, state.days, state.appointments);
+  // console.log('###Updated state.days:\n', days);
+  // console.log('###Final state.days:\n(Should be unchanged)', state.days);
+
   return {state, setDay, bookInterview, cancelInterview};
 };
