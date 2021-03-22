@@ -9,8 +9,17 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
+  /*
+  function getAppointmentsForDay(state, day) {
+    const filterDays = state.days.find(currDay => currDay.name === day);
+    return !filterDays ? [] : filterDays.appointments.map(apptID => state.appointments[apptID]);
+  };
+  */
+  //
   const getSpotsCount = (dayObj, appointments) => {
-    console.log('label', dayObj)
+    console.log('dayObj', dayObj)
+    console.log('.days', state.days)
+    console.log('.appointments', state.appointments)
     let count = 0;
     for(const id of dayObj.appointments) {
       const appointment = appointments[id];
@@ -20,7 +29,7 @@ export default function useApplicationData() {
     }
     return count;
   }
-  
+  //state.day, state.days, appointments
   const updateSpots = (dayName, days, appointments) => {
     const day = days.find((item) => item.name === dayName);
     const unbooked = getSpotsCount(day, appointments);
@@ -48,7 +57,6 @@ export default function useApplicationData() {
     return axios.put(`/api/appointments/${id}`, appointment)
       .then(() => {
         setState({...state, appointments, days: spots})
-        console.log(state)
       })
   };
 
@@ -62,7 +70,7 @@ export default function useApplicationData() {
       [id]: appointment
     };
     const spots = updateSpots(state.day, state.days, appointments);
-    return axios.delete(`/api/appointments/${id}`, appointment)
+    return axios.delete(`/api/appointments/${id}`)
       .then(() => setState({...state, appointments, days: spots}))
   };
 
@@ -83,7 +91,7 @@ export default function useApplicationData() {
   }, [])
 
 
-  console.log('###Initial state.days:\n', state.days);
+  // console.log('###Initial state.days:\n', state.days);
   // const days = updateSpots(state.day, state.days, state.appointments);
   // console.log('###Updated state.days:\n', days);
   // console.log('###Final state.days:\n(Should be unchanged)', state.days);

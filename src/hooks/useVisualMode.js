@@ -22,5 +22,5 @@ export default function useVisualMode(init) {
   };
   
   const mode = (history.slice(-1)[0]);
-  return {mode, transition, back, history};
+  return {mode, transition, back, history}; // remove history before submit
 };
