@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 import {
   cleanup,
   fireEvent,
@@ -105,7 +105,7 @@ describe("Application", () => {
     fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
     // 6. Click the "Save" button on the form.
     fireEvent.click(getByText(appointment, "Save"));
-    // 7. Check that the element with the text "Deleting" is displayed.
+    // 7. Check that the element with the text "Saving" is displayed.
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
     // 8. Wait until the element with the new student name is displayed.
     await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
@@ -114,7 +114,67 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
-
-    debug();
   });
+
+  it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
+    // 1. Render the Application
+    const { container, debug } = render(<Application />);
+    // 2. Wait until the text "Archie Cohen" is displayed
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    // 3. Click the "Edit" button on the booked appointment.
+    const appointment = getAllByTestId(
+      container,
+      "appointment"
+    ).find((appointment) => queryByText(appointment, "Archie Cohen"));
+
+    fireEvent.click(queryByAltText(appointment, "Edit"));
+    // 4. Edit the student name.
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" },
+    });
+    // 5. Change the interviewer.
+    fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
+    // 6. Click the "Save" button on the form.
+    fireEvent.click(getByText(appointment, "Save"));
+    // 7. Check that the element with the text "Saving" is displayed.
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+    // 8. Wait until the error save message is displayed.
+    await waitForElement(() => queryByText(appointment, "Could not save appointment."));
+    // 9. Click the "Close" button on the form.
+    fireEvent.click(getByAltText(appointment, "Close"));
+    // 10. Check that Edit form is being displayed.
+    expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
+  });
+/*
+  it("shows the save error when failing to save an appointment", async () => {
+    axios.put.mockRejectedValueOnce();
+    // 1. Render the Application
+    const { container, debug } = render(<Application />);
+    // 2. Wait until the text "Archie Cohen" is displayed
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+    // 3. Click the "Edit" button on the booked appointment.
+    const appointment = getAllByTestId(
+      container,
+      "appointment"
+    ).find((appointment) => queryByText(appointment, "Archie Cohen"));
+
+    fireEvent.click(queryByAltText(appointment, "Edit"));
+    // 4. Edit the student name.
+    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+      target: { value: "Lydia Miller-Jones" },
+    });
+    // 5. Change the interviewer.
+    fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
+    // 6. Click the "Save" button on the form.
+    fireEvent.click(getByText(appointment, "Save"));
+    // 7. Check that the element with the text "Saving" is displayed.
+    expect(getByText(appointment, "Saving")).toBeInTheDocument();
+    // 8. Wait until the error save message is displayed.
+    await waitForElement(() => queryByText(appointment, "Could not save appointment."));
+    // 9. Click the "Close" button on the form.
+    fireEvent.click(getByAltText(appointment, "Close"));
+    // 10. Check that Edit form is being displayed.
+    expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
+  });*/
 });
