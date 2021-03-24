@@ -140,41 +140,46 @@ describe("Application", () => {
     // 7. Check that the element with the text "Saving" is displayed.
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
     // 8. Wait until the error save message is displayed.
-    await waitForElement(() => queryByText(appointment, "Could not save appointment."));
+    await waitForElement(() =>
+      queryByText(appointment, "Could not save appointment.")
+    );
     // 9. Click the "Close" button on the form.
     fireEvent.click(getByAltText(appointment, "Close"));
     // 10. Check that Edit form is being displayed.
-    expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
+    expect(
+      getByPlaceholderText(appointment, /enter student name/i)
+    ).toBeInTheDocument();
   });
-/*
-  it("shows the save error when failing to save an appointment", async () => {
-    axios.put.mockRejectedValueOnce();
+
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
     // 1. Render the Application
     const { container, debug } = render(<Application />);
     // 2. Wait until the text "Archie Cohen" is displayed
     await waitForElement(() => getByText(container, "Archie Cohen"));
-    // 3. Click the "Edit" button on the booked appointment.
+    // 3. Click the "Delete" button on the booked appointment.
     const appointment = getAllByTestId(
       container,
       "appointment"
     ).find((appointment) => queryByText(appointment, "Archie Cohen"));
 
-    fireEvent.click(queryByAltText(appointment, "Edit"));
-    // 4. Edit the student name.
-    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
-      target: { value: "Lydia Miller-Jones" },
-    });
-    // 5. Change the interviewer.
-    fireEvent.click(getByAltText(appointment, "Tori Malcolm"));
-    // 6. Click the "Save" button on the form.
-    fireEvent.click(getByText(appointment, "Save"));
-    // 7. Check that the element with the text "Saving" is displayed.
-    expect(getByText(appointment, "Saving")).toBeInTheDocument();
-    // 8. Wait until the error save message is displayed.
-    await waitForElement(() => queryByText(appointment, "Could not save appointment."));
+    fireEvent.click(queryByAltText(appointment, "Delete"));
+    // 4. Check that the confirmation message appears.
+    expect(
+      getByText(appointment, "Delete the appointment?")
+    ).toBeInTheDocument();
+    // 5. Click the "Confirm" button on the confirmation.
+    fireEvent.click(queryByText(appointment, "Confirm"));
+    // 6. Check that the element with the text "Deleting" is displayed.
+    expect(getByText(appointment, "Deleting")).toBeInTheDocument();
+    // 8. Wait until the error delete message is displayed.
+    await waitForElement(() =>
+      queryByText(appointment, "Could not delete appointment.")
+    );
     // 9. Click the "Close" button on the form.
     fireEvent.click(getByAltText(appointment, "Close"));
-    // 10. Check that Edit form is being displayed.
-    expect(getByPlaceholderText(appointment, /enter student name/i)).toBeInTheDocument();
-  });*/
+    // 10. Check that existing appointment is being displayed.
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
+    debug();
+  });
 });
