@@ -9,13 +9,6 @@ export default function useApplicationData() {
     interviewers: {},
   });
 
-  /*
-  function getAppointmentsForDay(state, day) {
-    const filterDays = state.days.find(currDay => currDay.name === day);
-    return !filterDays ? [] : filterDays.appointments.map(apptID => state.appointments[apptID]);
-  };
-  */
-  //
   const getSpotsCount = (dayObj, appointments) => {
     let count = 0;
     for (const id of dayObj.appointments) {
@@ -26,7 +19,7 @@ export default function useApplicationData() {
     }
     return count;
   };
-  //state.day, state.days, appointments
+
   const updateSpots = (dayName, days, appointments) => {
     const day = days.find((item) => item.name === dayName);
     const unbooked = getSpotsCount(day, appointments);
