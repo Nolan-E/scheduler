@@ -18,13 +18,15 @@ Interview scheduler is a Single Page Application (SPA) built with React. It allo
 
 ***
 ## Final Product
-
+#### Create Interview:
 !['Create-Interview'](https://github.com/Nolan-E/scheduler/blob/master/docs/Create-Interview.gif?raw=true)
 <br>
 
+#### Edit & Delete Interview:
 !['Edit-Delete-Interview'](https://github.com/Nolan-E/scheduler/blob/master/docs/Edit-Delete-Interview.gif?raw=true)
 <br>
 
+#### Save & Delete Errors:
 !['Error-States'](https://github.com/Nolan-E/scheduler/blob/master/docs/Error-States.gif?raw=true)
 <br>
 
@@ -41,6 +43,12 @@ Interview scheduler is a Single Page Application (SPA) built with React. It allo
 - If an error occurs while saving or deleting an appointment, the user will be served an error message.
 - Closing the error message returns the user to the edit state if the error occurred while saving an appointment or to the schedule view if it occurred while attempting to delete.
 - User data is persisted as the application communicates with an API server through HTTP requests (via JSON format), using a PostgreSQL database.
+
+***
+## Future Development
+
+- Implement Websockets for real-time updates.
+- Host on Heroku or Netlify.
 
 ***
 ## Automated Testing
@@ -60,4 +68,11 @@ Interview scheduler is a Single Page Application (SPA) built with React. It allo
    ** Requires cypress to be installed externally.
 
 ***
-
+## Dependencies
+- Node
+- React
+- React-dom
+- React-scripts
+- Axios
+- Classnames
+- Normalize.css
