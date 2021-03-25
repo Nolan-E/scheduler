@@ -22,10 +22,10 @@ Interview scheduler is a Single Page Application (SPA) built with React. It allo
 !['Create-Interview'](https://github.com/Nolan-E/scheduler/blob/master/docs/Create-Interview.gif?raw=true)
 <br>
 
-!['Screenshot2']()
+!['Edit-Delete-Interview'](https://github.com/Nolan-E/scheduler/blob/master/docs/Edit-Delete-Interview.gif?raw=true)
 <br>
 
-!['Screenshot3']()
+!['Error-States'](https://github.com/Nolan-E/scheduler/blob/master/docs/Error-States.gif?raw=true)
 <br>
 
 ***
