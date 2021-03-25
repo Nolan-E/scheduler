@@ -53,19 +53,9 @@ Interview scheduler is a Single Page Application (SPA) built with React. It allo
 ***
 ## Automated Testing
 
-1. Jest - Unit & Integration Tests (98%+ Coverage):
-   ```sh
-   npm test
-   ```
-2. Storybook - Visual Component Isolation Tests:
-   ```sh
-   npm run storybook
-   ```
-3. Cypress** - End-to-End Tests:
-   ```sh
-   npm run cypress
-   ```
-   ** Requires cypress to be installed externally.
+1. Jest - Unit & Integration Tests (98%+ Coverage)
+2. Storybook - Visual Component Isolation Tests
+3. Cypress - End-to-End Tests
 
 ***
 ## Dependencies
