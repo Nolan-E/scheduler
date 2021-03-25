@@ -19,7 +19,7 @@ Interview scheduler is a Single Page Application (SPA) built with React. It allo
 ***
 ## Final Product
 
-!['Screenshot1']()
+!['Create-Interview'](https://github.com/Nolan-E/scheduler/blob/master/docs/Create-Interview.gif?raw=true)
 <br>
 
 !['Screenshot2']()
